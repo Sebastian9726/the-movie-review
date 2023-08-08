@@ -1,0 +1,226 @@
+{
+  "name": "bcs-payroll-loan-customer-documents",
+  "version": "10.0.0",
+  "description": "Proyecto base para la construcción de microservicios nestjs con lineamientos clean architecture",
+  "author": "Sebastian Traslaviña",
+  "modified": "Privado",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "release": "release-it --ci",
+    "cm": "git add . && git-cz"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.1.3",
+    "@nestjs/config": "^3.0.0",
+    "@nestjs/core": "^10.1.3",
+    "@nestjs/jwt": "^10.1.0",
+    "@nestjs/microservices": "^10.1.3",
+    "@nestjs/mongoose": "^10.0.1",
+    "@nestjs/passport": "^10.0.0",
+    "@nestjs/platform-express": "^10.1.3",
+    "@nestjs/swagger": "^7.1.6",
+    "@nestjs/terminus": "^10.0.1",
+    "async-local-storage": "^2.3.1",
+    "cache-manager": "^5.2.3",
+    "cache-manager-redis-store": "^3.0.1",
+    "cache-manager-redis-yet": "^4.1.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "cls-rtracer": "^2.6.3",
+    "cookie-parser": "^1.4.6",
+    "csurf": "^1.11.0",
+    "cz": "^1.8.2",
+    "dayjs": "^1.11.9",
+    "elastic-apm-node": "^3.48.0",
+    "formula-pmt": "^1.0.1",
+    "goal-seek": "^0.1.4",
+    "moment": "^2.29.4",
+    "nats": "^2.15.1",
+    "nestjs-real-ip": "^3.0.1",
+    "passport-jwt": "^4.0.1",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^5.0.1",
+    "rxjs": "^7.8.1",
+    "swagger-ui-express": "^5.0.0",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.7",
+    "@commitlint/config-conventional": "^17.6.7",
+    "@nestjs/cli": "^10.1.11",
+    "@nestjs/schematics": "^10.0.1",
+    "@nestjs/testing": "^10.1.3",
+    "@release-it/conventional-changelog": "^7.0.0",
+    "@types/cache-manager": "^4.0.2",
+    "@types/cache-manager-redis-store": "^2.0.1",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.3",
+    "@types/node": "^20.4.5",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^8.9.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "jest": "29.6.2",
+    "jest-junit": "^16.0.0",
+    "mock-express-response": "^0.3.0",
+    "prettier": "^3.0.0",
+    "release-it": "^16.1.3",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1",
+    "ts-loader": "^9.4.4",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.6"
+  },
+  "jest-junit": {
+    "suiteName": "UnitTest",
+    "outputDirectory": "./coverage",
+    "outputName": "test-report.xml",
+    "uniqueOutputName": "false",
+    "classNameTemplate": "{classname}-{title}",
+    "titleTemplate": "{classname}-{title}",
+    "ancestorSeparator": " › ",
+    "usePathForSuiteName": "true"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{ts,js}",
+      "!**/*.module.ts",
+      "!**/*config.ts",
+      "!**/*logger.ts",
+      "!**/main.ts"
+    ],
+    "collectCoverage": true,
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "roots": [
+      "<rootDir>"
+    ],
+    "rootDir": "src",
+    "testTimeout": 60000,
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "reporters": [
+      "default",
+      [
+        "jest-junit",
+        {
+          "suiteName": "UnitTest"
+        }
+      ]
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [],
+    "coverageThreshold": {
+      "global": {
+        "branches": 20,
+        "functions": 20,
+        "lines": 20,
+        "statements": 20
+      }
+    },
+    "coverageReporters": [
+      "cobertura",
+      "lcov"
+    ],
+    "setupFiles": [
+      "<rootDir>/../__mocks__/jestEnvVars.js"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}",
+      "requireUpstream": false,
+      "tag": false
+    },
+    "github": {
+      "release": false
+    },
+    "npm": {
+      "publish": false
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "infile": "CHANGELOG.md",
+        "preset": {
+          "name": "conventionalcommits",
+          "types": [
+            {
+              "type": "feat",
+              "section": "A feature commit adds new functionality or features to the codebase"
+            },
+            {
+              "type": "fix",
+              "section": "This type of commit fixes bugs or issues in the codebase"
+            },
+            {
+              "type": "docs",
+              "section": "A documentation commit adds or updates documentation for the codebase"
+            },
+            {
+              "type": "style",
+              "section": "This type of commit is made to improve the code's style or formatting, such as renaming variables or improving code readability"
+            },
+            {
+              "type": "refactor",
+              "section": "Refactoring commits are made to improve the quality of the codebase without changing its behavior"
+            },
+            {
+              "type": "perf",
+              "section": "Improves the performance"
+            },
+            {
+              "type": "test",
+              "section": "A test commit adds or updates tests to ensure that the code is working as expected"
+            },
+            {
+              "type": "build",
+              "section": "Changes that affect the build system or dependencies (npm, gradle, etc)"
+            },
+            {
+              "type": "ci",
+              "section": "Continuous Integration configuration changes in files/scripts (GitLab CI, GitHub Actions)"
+            },
+            {
+              "type": "chore",
+              "section": "Other changes that don't modify src or test files"
+            },
+            {
+              "type": "revert",
+              "section": "Reverts a previous commit"
+            },
+            {}
+          ]
+        }
+      }
+    }
+  }
+}

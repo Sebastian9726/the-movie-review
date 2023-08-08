@@ -1,0 +1,15 @@
+export const microServices = {
+  Authentication: 'Authentication',
+  Accounts: 'Accounts',
+  ApiComposer: 'Api Composer',
+  Customer: 'Customer',
+  CustomerDocuments: 'Customer Documents',
+  CustomerAdapter: 'Customer Adapter',
+  Disbursement: 'Disbursement',
+  Offers: 'Offers',
+  OtpAdapter: 'Otp Adapter',
+  PromissoryNote: 'Promissory Note',
+  Rating: 'Rating',
+  Simulator: 'Simulator',
+  Document: 'Document',
+};
