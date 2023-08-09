@@ -17,7 +17,7 @@ import { getModelToken } from '@nestjs/mongoose';
 import {
   MSDocumentLogModel,
   LogsSchema,
-} from '../../../../data-provider/model/logger/logs.model';
+} from '../../../../data-provider/entity/logger/logs.model';
 //paquetes para hacer mock del servicio de cache con redis
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 

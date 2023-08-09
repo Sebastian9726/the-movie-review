@@ -5,13 +5,29 @@ import { ExceptionManager } from './common/lib/exceptions-manager.filter';
 import { ControllerModule } from './controller/controller.module';
 import { CoreModule } from './core/core.module';
 import { DataProviderModule } from './data-provider/data-provider.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModel } from './data-provider/model/user/User.model';
+import { UserModel } from './data-provider/models/user/User.entity';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+        //Conexión a base de datos
+        TypeOrmModule.forRootAsync({
+          imports: [ConfigModule],
+          useFactory: (configService: ConfigService) => ({
+            type: 'postgres',
+            host: configService.get('PG_HOST'),
+            port: configService.get<number>('PG_PORT'),
+            username: configService.get('PG_USER'),
+            password: configService.get('PG_PASSWORD'),
+            database: configService.get('PG_DB'),
+            entities: [UserModel],
+            autoLoadEntities:true,
+            synchronize: true
+          }),
+          inject: [ConfigService],
+        }),
     CommonModule,
     DataProviderModule,
     CoreModule,

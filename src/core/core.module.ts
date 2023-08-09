@@ -13,6 +13,8 @@ import { IUserUc } from './use-case/user/save-document.uc';
 
 //implementations
 import { UserUc } from './use-case/user/impl/save-documents.uc.impl';
+import { IUserTransformUcRe } from './use-case/resources/user/transform.uc';
+import { UserTransformUcRe } from './use-case/resources/user/impl/transform.uc.impl';
 
 
 @Module({
@@ -21,7 +23,9 @@ import { UserUc } from './use-case/user/impl/save-documents.uc.impl';
   ],
   providers: [
    { provide: IUserUc, useClass: UserUc },
-  
+   //The Resources does not export 
+   { provide: IUserTransformUcRe, useClass: UserTransformUcRe },
+   
   ],
 
   exports: [

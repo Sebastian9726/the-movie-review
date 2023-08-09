@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { IUser } from '../../../core/entity/user/user.entity';
+import { LoginUserDto } from 'src/controller/dto/user/login-user.dto';
+import { ResponseUserDto } from 'src/controller/dto/user/response-user.dto';
+import { UpdatetUserDto } from 'src/controller/dto/user/update-user.td';
+import { UserDto } from 'src/controller/dto/user/user.dto';
 
 
 @Injectable()
 export abstract class IUserUc{
 
-    abstract updateUser(filter: any, data: any): Promise<any>;
+    abstract updateUser(name: string, updatetUser: UpdatetUserDto): Promise<ResponseUserDto>;
 
-    abstract createUser(user: IUser): Promise<any>;
+    abstract createUser(user: UserDto): Promise<UserDto>;
 
-    abstract getUser(username: string): Promise<any>;
+    abstract getUser(name: string): Promise<ResponseUserDto>;
+
+    abstract validate(loginUser:LoginUserDto): Promise<ResponseUserDto>;
 }

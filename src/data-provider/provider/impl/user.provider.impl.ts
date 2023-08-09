@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-
 import { IUserProvider } from '../user.provider';
-import { UserModel } from '../../model/user/User.model';
-
+import { UserModel } from 'src/data-provider/models/user/User.entity';
+import { IUser } from 'src/core/entity/user/user.entity';
+import { UpdatetUserDto } from 'src/controller/dto/user/update-user.td';
 
 
 @Injectable()
@@ -13,30 +13,31 @@ export class UserProvider implements IUserProvider {
     constructor(
         @InjectRepository(UserModel)
         private usersRepository: Repository<UserModel>,
-        
-
     ) { }
 
-    async getUser(username: string): Promise<any> {
+    async getUser(name: string): Promise<any> {
         try {
             const filter = {
-                "name": username
+                "name": name
             }
             return this.usersRepository.findOneBy(filter);
         } catch (e) {
-            return e
+            throw e
         }
     }
-    async updateUser(filter: any, data: any): Promise<any> {
+    async updateUser(name: string, updatetUser: UpdatetUserDto): Promise<any> {
         try {
-             await this.usersRepository.update(filter, data);
-             return this.usersRepository.findOne(filter);
+            const filter = {
+                "name": name
+            }
+             const update = await this.usersRepository.update(filter, updatetUser);
+             return this.usersRepository.findOneBy(filter);
 
         } catch (e) {
             return e
         }
     }
-    async createUser(user: UserModel): Promise<UserModel | null> {
+    async createUser(user: IUser): Promise<UserModel | null> {
         try {
         return this.usersRepository.save(user);
         } catch (e) {

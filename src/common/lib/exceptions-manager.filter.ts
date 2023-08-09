@@ -28,11 +28,11 @@ export class ExceptionManager implements ExceptionFilter {
     const req = ctx.getRequest();
 
     let result;
-console.log("hay un error",exception)
     result = {
       ...result,
       requestTime: moment().format(),
       method: req.method,
+      message: exception
     };
 
     response
@@ -40,12 +40,14 @@ console.log("hay un error",exception)
         'Strict-Transport-Security',
         'max-age=31536000; includeSubDomains',
       )
-      .status(result.status)
+      .status(HttpStatus.INTERNAL_SERVER_ERROR)
       .json(
+
+        result/*
         this.CrytoUtils.encryptData(
           JSON.stringify(result),
           this.configService.get('ENCRYPTKEY'),
-        ),
+        ),*/
       );
   }
 }

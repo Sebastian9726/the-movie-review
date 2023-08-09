@@ -17,7 +17,7 @@ import { CoreApiAuthProvider } from '../../../../data-provider/provider/core-api
 import {
   LogsSchema,
   MSDocumentLogModel,
-} from '../../../../data-provider/model/logger/logs.model';
+} from '../../../../data-provider/entity/logger/logs.model';
 import { IAuthValidate } from '../../../entity/auth-validate/validate.entity';
 import { BusinessException } from '../../../../common/lib/business-exceptions';
 import { CustomLoggerModule, loggerPinoConfig } from '@bcs/logger';

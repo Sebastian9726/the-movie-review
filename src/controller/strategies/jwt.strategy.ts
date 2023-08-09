@@ -23,11 +23,7 @@ export class AuthenticationService extends PassportStrategy(Strategy) {
     payload: any,
   ): Promise<any> {
 
-    const { documentNumber, documentType } = payload;
-    return  {
-      documentNumber,
-      documentType,
-    }
+    return payload.username
 
   }
 }

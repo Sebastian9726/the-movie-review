@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsNumber, IsArray, IsOptional } from "class-validator";
+import { IsNotEmpty, IsString, IsOptional } from "class-validator";
 import { IUser } from 'src/core/entity/user/user.entity';
-import { UserModel } from 'src/data-provider/model/user/User.model';
+import { UserModel } from 'src/data-provider/models/user/User.entity';
 
-export class CreateUserDto {
+export class UserDto {
 
       @IsNotEmpty()
       @IsString()
@@ -26,15 +26,10 @@ export class CreateUserDto {
       @ApiProperty({ description: "password", type: String })
       password: string;
 
-      constructor(user:IUser){
-            this.name = user.name
-            this.genre = user.genre
-            this.username = user.username
-            this.password = user.password
+      constructor(name: string, genre: string,  username: string,password: string ){
+            this.name = name
+            this.genre = genre
+            this.username = username
+            this.password = password
       }
-
-      static dtoToEntity(userDTO: CreateUserDto): UserModel {
-            return new UserModel(userDTO);
-      }
-
 }

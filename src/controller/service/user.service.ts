@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from "src/controller/dto/user/create-user.dto";
+import { UserDto } from '../dto/user/user.dto';
+import { LoginUserDto } from '../dto/user/login-user.dto';
+import { UpdatetUserDto } from '../dto/user/update-user.td';
 
 @Injectable()
 export abstract class IUserService {
 
-  abstract login( data:any): Promise<any>;// TIPAR DEL TIPO
+  abstract create(CreateUser: UserDto): Promise<any>;
 
-  abstract validateUser(username: string, pass: string ): Promise<any>;
+  abstract login( loginUser:LoginUserDto): Promise<any>;// TIPAR DEL TIPO
 
-  abstract create(CreateUserDto: CreateUserDto): Promise<CreateUserDto>;
+  abstract getProfile(username: string): Promise<any>;
 
-  abstract update(CreateUserDto: any): Promise<any>;
+  abstract update(name: string,UpdatetUser: UpdatetUserDto): Promise<any>;
 
  }
