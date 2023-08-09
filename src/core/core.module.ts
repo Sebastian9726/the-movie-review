@@ -6,15 +6,13 @@ import { Module } from '@nestjs/common';
 import { DataProviderModule } from '../data-provider/data-provider.module';
 
 //commons
-import { microServices } from '../common/configuration/microservices-name';
+
 
 //Interfaces
-//import { IDocumentsUc } from './use-case/documents/documents.uc';
-
-
+import { IUserUc } from './use-case/user/save-document.uc';
 
 //implementations
-//import { DocumentsUc } from './use-case/documents/impl/documents.uc.impl';
+import { UserUc } from './use-case/user/impl/save-documents.uc.impl';
 
 
 @Module({
@@ -22,12 +20,12 @@ import { microServices } from '../common/configuration/microservices-name';
     DataProviderModule,
   ],
   providers: [
-   // { provide: IDocumentsUc, useClass: DocumentsUc },
+   { provide: IUserUc, useClass: UserUc },
   
   ],
 
   exports: [
-   // IDocumentsUc,
+    IUserUc,
   ],
 })
 export class CoreModule {}

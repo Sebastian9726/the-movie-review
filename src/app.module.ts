@@ -6,6 +6,8 @@ import { ControllerModule } from './controller/controller.module';
 import { CoreModule } from './core/core.module';
 import { DataProviderModule } from './data-provider/data-provider.module';
 import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModel } from './data-provider/model/user/User.model';
 
 @Module({
   imports: [
@@ -16,7 +18,7 @@ import { ConfigModule } from '@nestjs/config';
     ControllerModule,
   ],
   controllers: [],
-  providers: [
+  providers: [ 
     {
       provide: APP_FILTER,
       useClass: ExceptionManager,

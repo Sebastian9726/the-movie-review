@@ -8,13 +8,9 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { Request, Response } from 'express';
 import * as moment from 'moment';
-import { ResponseService } from '../../controller/dto/response-service.dto';
-import { EmessageMapping } from '../utils/enums/message.enum';
-import GeneralUtil from '../utils/utils';
-import { BusinessException } from './business-exceptions';
 import { CrytoUtils } from './crypto-utils';
-import { IBCSLoggerService, InjectBCSPinoLogger } from '@bcs/logger';
-import utils from '../utils/utils';
+import { Console } from 'console';
+
 
 @Catch()
 export class ExceptionManager implements ExceptionFilter {
@@ -23,7 +19,7 @@ export class ExceptionManager implements ExceptionFilter {
   private readonly configService = new ConfigService();
 
   constructor(
-    @InjectBCSPinoLogger(ExceptionManager.name)
+    //@InjectBCSPinoLogger(ExceptionManager.name)
   ) {}
 
   async catch(exception, host: ArgumentsHost) {
@@ -31,36 +27,12 @@ export class ExceptionManager implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const req = ctx.getRequest();
 
-    let result: ResponseService;
-
-    if (exception instanceof BusinessException)
-      result = new ResponseService(
-        exception.success,
-        exception.details?.codMessage || exception.description,
-        exception.code,
-        exception.details?.document,
-      );
-    else if (exception instanceof HttpException)
-      result = new ResponseService(
-        false,
-        EmessageMapping.DEFAULT_ERROR,
-        exception.getStatus(),
-        exception.getResponse()['message'],
-      );
-    else
-      result = new ResponseService(
-        false,
-        EmessageMapping.DEFAULT_ERROR,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-
-    const origen: string = GeneralUtil.getOrigin(req['url']);
-
+    let result;
+console.log("hay un error",exception)
     result = {
       ...result,
       requestTime: moment().format(),
       method: req.method,
-      origen,
     };
 
     response

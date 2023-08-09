@@ -5,8 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthenticationService } from './strategies/jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
-import { ISaveDocumentsService } from './service/save-document.service';
-import { SaveDocumentsService } from './service/impl/save-documents/save-documents.service.impl';
+import { IUserService } from './service/user.service';
+import { UserService } from './service/impl/user/user.service.impl';
+import { UserController } from './rest/user/user.controller';
 
 @Module({
   imports: [
@@ -23,11 +24,11 @@ import { SaveDocumentsService } from './service/impl/save-documents/save-documen
     }),
   ],
   controllers: [
-    // controller
+    UserController
   ],
   providers: [
     AuthenticationService,
-    { provide: ISaveDocumentsService, useClass: SaveDocumentsService },
+    { provide: IUserService, useClass: UserService },
   ],
 })
 export class ControllerModule {}

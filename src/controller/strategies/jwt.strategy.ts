@@ -2,9 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
-
-import { AuthValidatedDto } from '../dto/auth-validated.dto';
-import { plainToInstance } from 'class-transformer';
 import { IncomingMessage } from 'http';
 
 
@@ -24,13 +21,13 @@ export class AuthenticationService extends PassportStrategy(Strategy) {
   async validate(
     req: IncomingMessage,
     payload: any,
-  ): Promise<AuthValidatedDto> {
+  ): Promise<any> {
 
     const { documentNumber, documentType } = payload;
-    return plainToInstance(AuthValidatedDto, {
+    return  {
       documentNumber,
       documentType,
-    });
+    }
 
   }
 }
