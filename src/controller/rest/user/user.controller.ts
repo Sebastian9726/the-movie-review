@@ -1,4 +1,4 @@
-import { Controller, Request, Post, UseGuards, Get, Body, Res, Req } from '@nestjs/common';
+import { Controller, Request, Post, UseGuards, Get, Body, Res, Req, Param } from '@nestjs/common';
 import { JwtAuthGuard } from '../../../controller/guards/jwt-auth.guard';
 import { IUserService } from 'src/controller/service/user.service';
 import { UserDto } from 'src/controller/dto/user/user.dto';
@@ -10,6 +10,21 @@ export class UserController {
   constructor(
     private userService: IUserService,
   ) { }
+
+  @ApiHeader({
+    name: 'Authorization',
+    description: 'Bearer token otorgado por el login',
+    required: true,
+  })
+  @UseGuards(JwtAuthGuard)
+  @Get(':userName/reviews')
+  getReviews(
+    @Request() req,
+    @Param('userName') userName: string,
+    
+    ) {
+    return this.userService.getProfile(userName);
+  }
 
 
   @Post('register')

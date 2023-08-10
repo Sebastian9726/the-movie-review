@@ -15,7 +15,7 @@ export class ResponseUserDto extends UserDto {
             user.name,
             user.genre,
             user.username,
-            user.password,           
+            user.password     
             )
         this.user_id = user.user_id
     }

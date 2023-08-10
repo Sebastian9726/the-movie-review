@@ -8,9 +8,11 @@ export abstract class IUserService {
 
   abstract create(CreateUser: UserDto): Promise<any>;
 
-  abstract login( loginUser:LoginUserDto): Promise<any>;// TIPAR DEL TIPO
+  abstract login( loginUser:LoginUserDto): Promise<any>;
 
   abstract getProfile(username: string): Promise<any>;
+
+  abstract getReviews(username: string): Promise<any>;
 
   abstract update(name: string,UpdatetUser: UpdatetUserDto): Promise<any>;
 

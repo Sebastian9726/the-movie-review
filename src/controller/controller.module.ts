@@ -8,6 +8,12 @@ import { PassportModule } from '@nestjs/passport';
 import { IUserService } from './service/user.service';
 import { UserService } from './service/impl/user/user.service.impl';
 import { UserController } from './rest/user/user.controller';
+import { ReviewController } from './rest/review/review.controller';
+import { MovieController } from './rest/movie/movie.controller';
+import { ReviewService } from './service/impl/review/review.service.impl';
+import { IReviewService } from './service/review.service';
+import { MovieService } from './service/impl/movie/movie.service.impl';
+import { IMovieService } from './service/movie.service';
 
 @Module({
   imports: [
@@ -24,11 +30,15 @@ import { UserController } from './rest/user/user.controller';
     }),
   ],
   controllers: [
-    UserController
+    UserController,
+    MovieController,
+    ReviewController
   ],
   providers: [
     AuthenticationService,
     { provide: IUserService, useClass: UserService },
+    { provide: IReviewService, useClass: ReviewService },
+    { provide: IMovieService, useClass: MovieService },
   ],
 })
 export class ControllerModule {}

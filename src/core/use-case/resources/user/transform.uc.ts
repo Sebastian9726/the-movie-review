@@ -10,6 +10,6 @@ export abstract class IUserTransformUcRe{
 
     abstract dtoToEntity(userDTO:UserDto): UserModel
 
-    abstract modelToDto(userEntity: ResponseUserDto): ResponseUserDto
+    abstract modelToDto(userEntity:UserModel ): ResponseUserDto
 
 }

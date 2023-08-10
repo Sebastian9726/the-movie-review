@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { IUserService } from '../../user.service';
-import { IUserUc } from '../../../../core/use-case/user/save-document.uc';
+import { IUserUc } from '../../../../core/use-case/user/user.uc';
 import { UserDto } from "src/controller/dto/user/user.dto";
 import { LoginUserDto } from 'src/controller/dto/user/login-user.dto';
 import { UpdatetUserDto } from 'src/controller/dto/user/update-user.td';
@@ -12,6 +12,11 @@ export class UserService implements IUserService {
   constructor(
     public readonly _userUc: IUserUc,
     private jwtService: JwtService) { }
+
+    
+  getReviews(username: string): Promise<any> {
+    throw new Error('Method not implemented.');
+  }
 
   async getProfile(username: string): Promise<any> {
     const GET_USER = await this._userUc.getUser(username)

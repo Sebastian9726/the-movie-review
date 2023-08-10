@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsOptional } from "class-validator";
-import { IUser } from 'src/core/entity/user/user.entity';
-import { UserModel } from 'src/data-provider/models/user/User.entity';
+import { IsNotEmpty, IsString, IsOptional, IsArray } from "class-validator";
+
 
 export class UserDto {
 
@@ -15,7 +14,6 @@ export class UserDto {
       @ApiProperty({ description: "genre", type: String })
       genre: string;
 
-
       @IsNotEmpty()
       @IsString()
       @ApiProperty({ description: "user", type: String })
@@ -26,7 +24,12 @@ export class UserDto {
       @ApiProperty({ description: "password", type: String })
       password: string;
 
-      constructor(name: string, genre: string,  username: string,password: string ){
+      constructor(
+            name: string,
+            genre: string,
+            username: string,
+            password: string
+             ){
             this.name = name
             this.genre = genre
             this.username = username

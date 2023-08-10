@@ -12,7 +12,8 @@ const info = require('../package.json');
 async function bootstrap() {
   const port = 3000
   const app = await NestFactory.create(AppModule, {
-    bufferLogs: true,
+    bufferLogs: true, // Activa el búfer de registros
+    logger: ['log', 'error', 'warn', 'debug', 'verbose'], // Niveles de registro permitidos
   });
 
   //Configuración libreria para validación de DTOs

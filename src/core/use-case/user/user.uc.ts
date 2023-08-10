@@ -8,11 +8,11 @@ import { UserDto } from 'src/controller/dto/user/user.dto';
 @Injectable()
 export abstract class IUserUc{
 
-    abstract updateUser(name: string, updatetUser: UpdatetUserDto): Promise<ResponseUserDto>;
+    abstract updateUser(name: string, updatetUser: UpdatetUserDto): Promise<any>;
 
     abstract createUser(user: UserDto): Promise<UserDto>;
 
-    abstract getUser(name: string): Promise<ResponseUserDto>;
+    abstract getUser(name: string): Promise<any>;
 
-    abstract validate(loginUser:LoginUserDto): Promise<ResponseUserDto>;
+    abstract validate(loginUser:LoginUserDto): Promise<any>;
 }

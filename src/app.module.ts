@@ -8,6 +8,8 @@ import { DataProviderModule } from './data-provider/data-provider.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModel } from './data-provider/models/user/User.entity';
+import { ReviewModel } from './data-provider/models/review/Review.entity';
+import { MovieModel } from './data-provider/models/movie/Movie.entity';
 
 @Module({
   imports: [
@@ -22,7 +24,7 @@ import { UserModel } from './data-provider/models/user/User.entity';
             username: configService.get('PG_USER'),
             password: configService.get('PG_PASSWORD'),
             database: configService.get('PG_DB'),
-            entities: [UserModel],
+            entities: [UserModel,ReviewModel,MovieModel],
             autoLoadEntities:true,
             synchronize: true
           }),
