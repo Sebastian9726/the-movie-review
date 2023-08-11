@@ -13,7 +13,7 @@ services:
       - PG_USER=myuser
       - PG_PASSWORD=mypassword
       - PG_DB=mydb
-      - PG_PORT=5434
+      - PG_PORT=5432
       - PG_HOST=postgres
     depends_on:
       - postgres
@@ -21,7 +21,7 @@ services:
     image: postgres:latest
     container_name: my-postgres
     ports:
-      - 5434:5434
+      - 5432:5432
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
