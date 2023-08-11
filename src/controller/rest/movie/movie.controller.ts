@@ -2,12 +2,13 @@ import { Controller, Request, Post, UseGuards, Get, Body, Res, Req, Param } from
 import { JwtAuthGuard } from '../../../controller/guards/jwt-auth.guard';
 import { IUserService } from 'src/controller/service/user.service';
 import { ApiHeader } from '@nestjs/swagger';
+import { IMovieService } from 'src/controller/service/movie.service';
 
 
 @Controller('movies')
 export class MovieController {
   constructor(
-    private userService: IUserService,
+    private _movieService: IMovieService,
   ) { }
 
   @ApiHeader({
@@ -18,9 +19,9 @@ export class MovieController {
   @UseGuards(JwtAuthGuard)
   @Get(':tmdbId/reviews')
   getProfile(
-    @Param('tmdbId') tmdbId: string,
+    @Param('tmdbId') tmdbId: number,
     @Request() req) {
-    return this.userService.getProfile(tmdbId);
+    return this._movieService.getMoviesReviews(tmdbId);
   }
 
 }

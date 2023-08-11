@@ -1,7 +1,7 @@
 import { Logger, Injectable } from '@nestjs/common';
 import { IApiMoviesProvider } from '../api-movies';
 import { catchError, firstValueFrom } from 'rxjs';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosHeaders } from 'axios';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 
@@ -16,17 +16,25 @@ export class ApiMoviesProvider implements IApiMoviesProvider {
     ) { }
 
 
-    async request(data: any): Promise<any> {
-        const url = this.configService.get('PAYRROLLOANVIABILITYURL');
+    async request(idMovie: number): Promise<any> {
+        const TOKEN_TMDB = this.configService.get('TOKEN_TMDB');
+        const URL = this.configService.get('URL_TMDB_MOVIE');
+        const config = {
+            headers:{
+                "Authorization": `Bearer ${TOKEN_TMDB}`,
+                "accept": 'application/json'
+            }
+
+        }
         const  dataResponse  = await firstValueFrom(
-            this.httpService.get<any>(url+`${data}?language=en-US`).pipe(
+            this.httpService.get(URL+`${idMovie}?language=en-US`,config).pipe(
                 catchError((error: AxiosError) => {
                     this.logger.error(error.response.data);
                     throw 'An error happened with api movies TMDB!';
                 }),
             ),
         );
-        return dataResponse;
+        return dataResponse.data;
     }
 
 }

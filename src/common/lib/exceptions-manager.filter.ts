@@ -40,7 +40,7 @@ export class ExceptionManager implements ExceptionFilter {
         'Strict-Transport-Security',
         'max-age=31536000; includeSubDomains',
       )
-      .status(HttpStatus.INTERNAL_SERVER_ERROR)
+      .status(exception.status? exception.status : HttpStatus.INTERNAL_SERVER_ERROR)
       .json(
 
         result/*

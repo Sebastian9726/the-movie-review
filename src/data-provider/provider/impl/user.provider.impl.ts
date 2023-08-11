@@ -21,7 +21,7 @@ export class UserProvider implements IUserProvider {
     async getUser(name: string): Promise<any> {
         try {
             const filter = {
-                "name": name
+                "user_name": name
             }
             return this.usersRepository.findOneBy(filter);
         } catch (e) {
@@ -31,7 +31,7 @@ export class UserProvider implements IUserProvider {
     async updateUser(name: string, updatetUser: UpdatetUserDto): Promise<any> {
         try {
             const filter = {
-                "name": name
+                "user_name": name
             }
             const update = await this.usersRepository.update(filter, updatetUser);
             return this.usersRepository.findOneBy(filter);
@@ -42,7 +42,7 @@ export class UserProvider implements IUserProvider {
     }
     async createUser(userDto: UserDto): Promise<UserModel | null> {
         try {
-
+            this.logger.log(`createUser ${userDto}`)
             const { ...userDetail } = userDto
             const review = []
             const user = this.usersRepository.create({
@@ -50,10 +50,9 @@ export class UserProvider implements IUserProvider {
                 review
             });
             const createUser = await this.usersRepository.save(user)
-            this.logger.log("created",createUser)
+            this.logger.log(`created ${createUser}`)
             return createUser
         } catch (e) {
-
             this.logger.error(e);
             return e
         }

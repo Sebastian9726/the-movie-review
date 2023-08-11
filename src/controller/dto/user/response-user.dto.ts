@@ -12,7 +12,6 @@ export class ResponseUserDto extends UserDto {
     user_id: string
     constructor(user: IUser) {
         super(
-            user.name,
             user.genre,
             user.username,
             user.password     

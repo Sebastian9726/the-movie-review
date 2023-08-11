@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ReviewDto } from '../dto/rewied/review.dto';
+import { ReviewDto } from '../dto/review/review.dto';
 
 @Injectable()
 export abstract class IReviewService {

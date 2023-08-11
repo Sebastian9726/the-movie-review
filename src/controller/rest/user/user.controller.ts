@@ -23,7 +23,7 @@ export class UserController {
     @Param('userName') userName: string,
     
     ) {
-    return this.userService.getProfile(userName);
+    return this.userService.getReviews(userName);
   }
 
 

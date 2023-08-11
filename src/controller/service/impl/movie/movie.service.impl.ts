@@ -10,7 +10,7 @@ export class MovieService implements IMovieService {
     public readonly _movieUc: IMovieUc,
   ) { }
 
-  async getMoviesReviews(tmdbId: string): Promise<any> {
+  async getMoviesReviews(tmdbId: number): Promise<any> {
     return this._movieUc.getMoviesReviews(tmdbId)
   }
 

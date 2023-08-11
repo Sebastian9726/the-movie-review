@@ -4,11 +4,6 @@ import { IsNotEmpty, IsString, IsOptional, IsArray } from "class-validator";
 
 export class UserDto {
 
-      @IsNotEmpty()
-      @IsString()
-      @ApiProperty({ description: "name", type: String })
-      name: string
-
       @IsOptional()
       @IsString()
       @ApiProperty({ description: "genre", type: String })
@@ -16,8 +11,8 @@ export class UserDto {
 
       @IsNotEmpty()
       @IsString()
-      @ApiProperty({ description: "user", type: String })
-      username: string;
+      @ApiProperty({ description: "userName", type: String })
+      userName: string;
 
       @IsNotEmpty()
       @IsString()
@@ -25,14 +20,12 @@ export class UserDto {
       password: string;
 
       constructor(
-            name: string,
             genre: string,
-            username: string,
+            userName: string,
             password: string
              ){
-            this.name = name
             this.genre = genre
-            this.username = username
+            this.userName = userName
             this.password = password
       }
 }

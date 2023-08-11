@@ -14,8 +14,9 @@ export class UserService implements IUserService {
     private jwtService: JwtService) { }
 
     
-  getReviews(username: string): Promise<any> {
-    throw new Error('Method not implemented.');
+  async getReviews(username: string): Promise<any> {
+    const GET_USER_REVIEWS = await this._userUc.getUserReviews(username)
+    return GET_USER_REVIEWS
   }
 
   async getProfile(username: string): Promise<any> {
@@ -42,8 +43,8 @@ export class UserService implements IUserService {
 
 
   async login(loginUser:LoginUserDto) {
-    const GET_USER = await this._userUc.validate(loginUser)
-    const payload = { username: GET_USER.name, sub: GET_USER.user_id };
+    const GET_USER = await this._userUc.validateUser(loginUser)
+    const payload = { username: GET_USER.user_name, sub: GET_USER.user_id };
     return {
       access_token: this.jwtService.sign(payload),
     };

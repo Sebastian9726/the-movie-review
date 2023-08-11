@@ -9,9 +9,8 @@ export class MovieModel extends AbstractEntity<MovieModel>  {
         unique: true,
         primary:true
     })
-    tmdb_Id: number;
+    tmdb_id: number;
 
-    
     @Column()
     title: string;
 
@@ -20,6 +19,9 @@ export class MovieModel extends AbstractEntity<MovieModel>  {
 
     @Column()
     poster: string;
+
+    @Column()
+    overview: string;
 
     @OneToMany(
         () => ReviewModel, 

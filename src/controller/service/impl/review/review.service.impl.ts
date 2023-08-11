@@ -1,6 +1,6 @@
 import {  Injectable } from '@nestjs/common';
 import { IReviewService } from '../../review.service';
-import { ReviewDto } from 'src/controller/dto/rewied/review.dto';
+import { ReviewDto } from 'src/controller/dto/review/review.dto';
 import { IReviewUc } from 'src/core/use-case/review/review.uc';
 @Injectable()
 export class ReviewService implements IReviewService {

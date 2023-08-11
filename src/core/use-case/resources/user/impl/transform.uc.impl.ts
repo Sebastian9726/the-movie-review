@@ -13,16 +13,15 @@ import { ReviewModel } from 'src/data-provider/models/review/Review.entity';
 export class UserTransformUcRe implements IUserTransformUcRe {
 
 
-    dtoToEntity(userDTO: IUser): UserModel {
+    dtoToEntity(userDTO: IUser): any {
         const user = {
             user_id: uuidv4(),
-            name: userDTO.name,
             genre: userDTO.genre,
             username: userDTO.username,
             password: userDTO.password
 
         } satisfies IUser
-        return user
+        //return user
     }
 
     modelToDto(userEntity: UserModel): any {

@@ -7,7 +7,7 @@ export class MovieDto {
       @IsNotEmpty()
       @IsString()
       @ApiProperty({ description: "tmdb_Id", type: Number })
-      tmdb_Id: number
+      tmdb_id: number
 
       @IsOptional()
       @IsString()
@@ -24,22 +24,29 @@ export class MovieDto {
       @ApiProperty({ description: "poster", type: String })
       poster: string;
 
+      @IsNotEmpty()
+      @IsString()
+      @ApiProperty({ description: "overview", type: String })
+      overview: string;
+
       @IsString({each:true})
       @IsArray()
       @ApiProperty({ description: "review", type: [String] })
       review: string[];
 
       constructor(
-            tmdb_Id:number,
+            tmdb_id:number,
             title: string,
             release_date: Date,
             poster: string,
+            overview:string,
             review: string[] 
              ){
-            this.tmdb_Id = tmdb_Id
+            this.tmdb_id = tmdb_id
             this.title = title
             this.release_date = release_date
             this.poster = poster
+            this.overview = overview
             this.review = review
       }
 }

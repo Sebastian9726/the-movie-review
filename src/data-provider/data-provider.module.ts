@@ -36,7 +36,8 @@ import { MovieProvider } from './provider/impl/movie.provider.impl';
   exports: [
     IUserProvider,
     IReviewProvider,
-    IMovieProvider
+    IMovieProvider,
+    IApiMoviesProvider
   ],
 })
 export class DataProviderModule {}

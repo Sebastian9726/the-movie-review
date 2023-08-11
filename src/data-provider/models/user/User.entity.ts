@@ -8,16 +8,14 @@ export class UserModel extends AbstractEntity<UserModel> {
     @PrimaryGeneratedColumn('uuid')
     user_id: string;
 
+    
     @Column('text', {
         unique: true
     },)
-    name: string;
+    user_name: string
 
     @Column('text')
     genre: string;
-    
-    @Column()
-    username: string
 
     @Column()
     password: string
@@ -25,7 +23,7 @@ export class UserModel extends AbstractEntity<UserModel> {
     @OneToMany(
         () => ReviewModel,
         (review) => review.name,
-        { cascade: true }
+        { cascade: true, eager:true }
     )
     review?: ReviewModel[]
     
