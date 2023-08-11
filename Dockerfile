@@ -10,7 +10,7 @@ FROM base AS dev
 ENV NODE_ENV=dev
 RUN npm install --frozen-lockfile
 COPY . .
-CMD [ "npm", "start:dev" ]
+CMD [ "npm", "start" ]
 
 FROM dev AS test
 ENV NODE_ENV=test

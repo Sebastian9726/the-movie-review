@@ -19,6 +19,7 @@ export class ApiMoviesProvider implements IApiMoviesProvider {
     async request(idMovie: number): Promise<any> {
         const TOKEN_TMDB = this.configService.get('TOKEN_TMDB');
         const URL = this.configService.get('URL_TMDB_MOVIE');
+        this.logger.log("request to "+ JSON.stringify(URL));
         const config = {
             headers:{
                 "Authorization": `Bearer ${TOKEN_TMDB}`,
