@@ -13,25 +13,17 @@ import { ReviewProvider } from './provider/impl/review.provider.impl';
 import { IMovieProvider } from './provider/movie.provider';
 import { MovieProvider } from './provider/impl/movie.provider.impl';
 
-
 @Module({
   imports: [
     //http
     HttpModule,
-
-    //cache
-
-
-  TypeOrmModule.forFeature([UserModel,ReviewModel,MovieModel],)
-
+    TypeOrmModule.forFeature([UserModel, ReviewModel, MovieModel],)
   ],
   providers: [
-
-{ provide: IUserProvider, useClass: UserProvider },
-{ provide: IReviewProvider, useClass: ReviewProvider },
-{ provide: IMovieProvider, useClass: MovieProvider },
-{ provide: IApiMoviesProvider, useClass: ApiMoviesProvider },
-
+    { provide: IUserProvider, useClass: UserProvider },
+    { provide: IReviewProvider, useClass: ReviewProvider },
+    { provide: IMovieProvider, useClass: MovieProvider },
+    { provide: IApiMoviesProvider, useClass: ApiMoviesProvider },
   ],
   exports: [
     IUserProvider,
@@ -40,4 +32,4 @@ import { MovieProvider } from './provider/impl/movie.provider.impl';
     IApiMoviesProvider
   ],
 })
-export class DataProviderModule {}
+export class DataProviderModule { }

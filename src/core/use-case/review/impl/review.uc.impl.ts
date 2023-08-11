@@ -22,7 +22,7 @@ export class ReviewUc implements IReviewUc {
     try {
 
       this.logger.log("createReview start the flow")
-      let movie = await this._movieUc.getMoviesReviews(createReview.movie)
+      let movie = await this._movieUc.getMoviesReviews(createReview.tmdbId)
       this.logger.log(`query movie table response: ${JSON.stringify(movie)}`)
       const movie_created = await this._reviewProvider.createReview(createReview, movie)
       this.logger.log(`query movie table response: ${JSON.stringify(movie_created)}`)

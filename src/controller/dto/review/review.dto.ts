@@ -16,8 +16,8 @@ export class ReviewDto {
 
       @IsNotEmpty()
       @IsNumber()
-      @ApiProperty({ description: "movie", type: Number })
-      movie: number;
+      @ApiProperty({ description: "tmdbId", type: Number })
+      tmdbId: number;
 
       @IsNotEmpty()
       @Min(1, { message: 'The min value is 1' }) // Definir valor mínimo
@@ -33,7 +33,7 @@ export class ReviewDto {
             userName: string 
              ){
             this.comment = comment
-            this.movie = movie
+            this.tmdbId = movie
             this.rating = rating
             this.userName = userName
 
