@@ -10,7 +10,7 @@ import { ExceptionManager } from './common/lib/exceptions-manager.filter';
 const info = require('../package.json');
 
 async function bootstrap() {
-  const port = 3000
+  const port = process.env.PORT ||3001
   const app = await NestFactory.create(AppModule, {
     bufferLogs: true, // Activa el búfer de registros
     logger: ['log', 'error', 'warn', 'debug', 'verbose'], // Niveles de registro permitidos
