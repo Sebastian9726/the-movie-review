@@ -8,7 +8,6 @@ export class UserModel extends AbstractEntity<UserModel> {
     @PrimaryGeneratedColumn('uuid')
     user_id: string;
 
-    
     @Column('text', {
         unique: true
     },)

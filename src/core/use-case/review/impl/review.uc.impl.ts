@@ -13,11 +13,7 @@ export class ReviewUc implements IReviewUc {
     private readonly _movieUc: IMovieUc,
 
   ) { }
-  async getUserReviews(name: string): Promise<any> {
-    this.logger.log("getUserReviews start the the flow",)
-    const movie_created = await this._reviewProvider.getUserReview(name)
-    return movie_created
-  }
+  
   async createReview(createReview: ReviewDto): Promise<any> {
 
     /*
@@ -25,7 +21,7 @@ export class ReviewUc implements IReviewUc {
     */
     try {
 
-      this.logger.log("createReview start the flow",)
+      this.logger.log("createReview start the flow")
       let movie = await this._movieUc.getMoviesReviews(createReview.movie)
       this.logger.log(`query movie table response: ${JSON.stringify(movie)}`)
       const movie_created = await this._reviewProvider.createReview(createReview, movie)
@@ -34,7 +30,7 @@ export class ReviewUc implements IReviewUc {
 
     } catch (e) {
       this.logger.error(e);
-      return e
+      throw e
     }
 
 

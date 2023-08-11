@@ -14,30 +14,37 @@ export class MovieProvider implements IMovieProvider {
         private movieRepository: Repository<MovieModel>,
     ) { }
 
-    async getMovies(tmdbId: number): Promise<any> {
+    async getMovies(tmdbId: number): Promise<MovieModel> {
         try {
-            
-            const filter = {
-                "tmdb_id": tmdbId
-            }
-            return await this.movieRepository.findOneBy(filter);
+            this.logger.log(`getMovie with tmdb_id:${tmdbId}`)
+            const movieFound = await this.movieRepository
+                .createQueryBuilder('movie')
+                .where("tmdb_id = :tmdb_id", { tmdb_id: tmdbId })
+                .leftJoinAndSelect("movie.review", "review")
+                .leftJoin("review.name", "user")
+                .addSelect(['user.user_name', 'user.user_id'])
+                .getOne()
+            this.logger.log(`movie Found : ${JSON.stringify(movieFound)}`)
+            return movieFound
         } catch (e) {
+            this.logger.error(e)
             return e
         }
     }
 
-    async createMovies(movie:MovieDto): Promise<MovieModel> {
+    async createMovies(movie: MovieDto): Promise<MovieModel> {
 
         this.logger.log(`createMovies ${JSON.stringify(movie)}`)
         const review = []
         const movieCreated = this.movieRepository.create({
             ...movie,
+            movie_id: uuidv4(),
             review
         });
         const movieSaved = await this.movieRepository.save(movieCreated)
         this.logger.log(`created ${JSON.stringify(movieSaved)}`)
         return movieSaved
-        
+
 
     }
 

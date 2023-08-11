@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { LoginUserDto } from 'src/controller/dto/user/login-user.dto';
-import { ResponseUserDto } from 'src/controller/dto/user/response-user.dto';
 import { UpdatetUserDto } from 'src/controller/dto/user/update-user.td';
 import { UserDto } from 'src/controller/dto/user/user.dto';
 import { UserModel } from 'src/data-provider/models/user/User.entity';

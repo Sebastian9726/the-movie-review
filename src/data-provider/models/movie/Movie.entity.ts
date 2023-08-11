@@ -5,9 +5,12 @@ import { AbstractEntity } from "../abstract.entity";
 @Entity('movie')
 export class MovieModel extends AbstractEntity<MovieModel>  {
     
+    
+    @PrimaryGeneratedColumn('uuid')
+    movie_id: string;
+
     @Column('int', {
         unique: true,
-        primary:true
     })
     tmdb_id: number;
 
@@ -26,7 +29,7 @@ export class MovieModel extends AbstractEntity<MovieModel>  {
     @OneToMany(
         () => ReviewModel, 
         (review) => review.movie,
-        { cascade: true }
+        { cascade: true, eager:true }
     )
     review: ReviewModel[];
 
