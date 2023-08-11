@@ -41,5 +41,15 @@ If you want to learn more about creating good readme files then refer the follow
 
 ![Alt text](image-5.png)
 
+TODO: Tools implemented:
+1. Nest v10
+1.1.    Swagger
+1.2.    Express
+1.3.    Class validator
+1.4     Typeorm     
+2. Postgresql
+3. Docker 
+4. It was implemented the clean architecure
+
 
 
