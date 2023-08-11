@@ -30,7 +30,7 @@ export class ApiMoviesProvider implements IApiMoviesProvider {
             this.httpService.get(URL+`${idMovie}?language=en-US`,config).pipe(
                 catchError((error: AxiosError) => {
                     this.logger.error(error.response.data);
-                    throw 'An error happened with api movies TMDB!';
+                    throw 'An error happened with api movies TMDB:'+ JSON.stringify(error.response.data)
                 }),
             ),
         );

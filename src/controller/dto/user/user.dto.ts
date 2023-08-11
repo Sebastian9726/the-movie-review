@@ -11,8 +11,8 @@ export class UserDto {
 
       @IsNotEmpty()
       @IsString()
-      @ApiProperty({ description: "userName", type: String })
-      userName: string;
+      @ApiProperty({ description: "user_name", type: String })
+      user_name: string;
 
       @IsNotEmpty()
       @IsString()
@@ -21,11 +21,11 @@ export class UserDto {
 
       constructor(
             genre: string,
-            userName: string,
+            user_name: string,
             password: string
              ){
             this.genre = genre
-            this.userName = userName
+            this.user_name = user_name
             this.password = password
       }
 }

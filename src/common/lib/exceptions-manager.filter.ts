@@ -36,10 +36,6 @@ export class ExceptionManager implements ExceptionFilter {
     };
 
     response
-      .setHeader(
-        'Strict-Transport-Security',
-        'max-age=31536000; includeSubDomains',
-      )
       .status(exception.status? exception.status : HttpStatus.INTERNAL_SERVER_ERROR)
       .json(
 

@@ -6,5 +6,4 @@ import { MovieDto } from 'src/controller/dto/movie/movie.dto';
 @Injectable()
 export abstract class IReviewProvider {
     abstract createReview(review: ReviewDto, movie:MovieDto  ): Promise<ReviewModel | null>;
-    abstract getUserReview(name:string ): Promise<ReviewModel | null>;
 }

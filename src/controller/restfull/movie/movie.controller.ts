@@ -1,6 +1,5 @@
-import { Controller, Request, Post, UseGuards, Get, Body, Res, Req, Param } from '@nestjs/common';
+import { Controller, Request, Post, UseGuards, Get, Body, Res, Req, Param, Query } from '@nestjs/common';
 import { JwtAuthGuard } from '../../../controller/guards/jwt-auth.guard';
-import { IUserService } from 'src/controller/service/user.service';
 import { ApiHeader } from '@nestjs/swagger';
 import { IMovieService } from 'src/controller/service/movie.service';
 

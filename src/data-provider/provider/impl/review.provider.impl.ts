@@ -2,14 +2,14 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+import { NotFoundException } from '@nestjs/common';
 import { UserModel } from 'src/data-provider/models/user/User.entity';
 import { ReviewModel } from 'src/data-provider/models/review/Review.entity';
 import { IReviewProvider } from '../review.provider';
 import { MovieModel } from 'src/data-provider/models/movie/Movie.entity';
 import { ReviewDto } from 'src/controller/dto/review/review.dto';
 import { MovieDto } from 'src/controller/dto/movie/movie.dto';
-import { skip, take } from 'rxjs';
-import { join } from 'path';
+import { ErrorMessage, ResponseMessage } from 'src/common/utils/enums/params.enum';
 
 @Injectable()
 export class ReviewProvider implements IReviewProvider {
@@ -23,28 +23,6 @@ export class ReviewProvider implements IReviewProvider {
         private movieRepository: Repository<MovieModel>,
     ) { }
 
-    async getUserReview(userName: string): Promise<any> {
-        try {
-            this.logger.log(`createReview, ${userName}`)
-            const reviews = await this.reviewsRepository.find({
-                relations: {
-                    name: true,
-                    movie: true
-                },
-                where: {
-                    name: {
-                        user_name: userName
-                    }
-                },
-                take: 10,
-                skip: 0
-            });
-            return reviews
-        } catch (error) {
-            this.logger.error(error)
-        }
-
-    }
 
     async createReview(createReview: ReviewDto, movie: MovieDto | MovieModel): Promise<any> {
         try {
@@ -54,33 +32,37 @@ export class ReviewProvider implements IReviewProvider {
                 "user_name": userName
             }
             const user = await this.usersRepository.findOneBy(filter);
-            const movieFound = await this.movieRepository.findOneBy({ tmdb_id: movie.tmdb_id });
-            this.logger.log(`movie Found: ${JSON.stringify(movieFound)}`)
-            const reviewModelCreated = new ReviewModel({
-                review_id: uuidv4(),
-                name: user,
-                comment,
-                rating
-            })
-            const reviewCreated = [this.reviewsRepository.create(reviewModelCreated)]
-            if (movieFound) {
-                const movieCreated = this.movieRepository.create(
-                    {
-                        ...movie,
-                        review: reviewCreated
-                    }
-                )
-                const movie_saved = await this.movieRepository.save(movieCreated)
-                this.logger.log(`createReview, ${JSON.stringify(movie_saved)}`)
-                return movieCreated.review
-
+            if(user){
+                const movieFound = await this.movieRepository.findOneBy({ tmdb_id: movie.tmdb_id });
+                this.logger.log(`movie Found: ${JSON.stringify(movieFound)}`)
+                const reviewModelCreated = new ReviewModel({
+                    review_id: uuidv4(),
+                    name: user,
+                    comment,
+                    rating
+                })
+                const reviewCreated = [this.reviewsRepository.create(reviewModelCreated)]
+                if (!movieFound) {
+                    const movieCreated = this.movieRepository.create(
+                        {
+                            ...movie,
+                            review: reviewCreated
+                        }
+                    )
+                    const movie_saved = await this.movieRepository.save(movieCreated)
+                    this.logger.log(`createReview, ${JSON.stringify(movie_saved)}`)
+    
+                }else{
+                    reviewModelCreated.movie = movieFound
+                    await this.reviewsRepository.save(reviewModelCreated)
+                }
+                return {message: ResponseMessage['RR-01']}
             }
-            reviewModelCreated.movie = movieFound
-            const reviewSaved = await this.reviewsRepository.save(reviewModelCreated)
-            return reviewSaved
+            throw new NotFoundException(`${ErrorMessage['UE-01']+ userName}`)
+           
         } catch (e) {
             this.logger.error(e);
-            return e
+            throw e
         }
     }
 

@@ -7,13 +7,14 @@ import { AuthenticationService } from './strategies/jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { IUserService } from './service/user.service';
 import { UserService } from './service/impl/user/user.service.impl';
-import { UserController } from './rest/user/user.controller';
-import { ReviewController } from './rest/review/review.controller';
-import { MovieController } from './rest/movie/movie.controller';
+
 import { ReviewService } from './service/impl/review/review.service.impl';
 import { IReviewService } from './service/review.service';
 import { MovieService } from './service/impl/movie/movie.service.impl';
 import { IMovieService } from './service/movie.service';
+import { UserController } from './restfull/user/user.controller';
+import { MovieController } from './restfull/movie/movie.controller';
+import { ReviewController } from './restfull/review/review.controller';
 
 @Module({
   imports: [

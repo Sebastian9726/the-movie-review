@@ -7,8 +7,7 @@ import { LoginUserDto } from 'src/controller/dto/user/login-user.dto';
 import { UpdatetUserDto } from 'src/controller/dto/user/update-user.td';
 @Injectable()
 export class UserService implements IUserService {
-
-
+  
   constructor(
     public readonly _userUc: IUserUc,
     private jwtService: JwtService) { }

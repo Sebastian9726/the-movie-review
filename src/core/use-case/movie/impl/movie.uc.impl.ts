@@ -35,7 +35,7 @@ export class MovieUc implements IMovieUc {
         throw "The movie does not found"
       }
     } else {
-      this.logger.log("createReview start the flow",)
+      this.logger.log("createReview found a movie in movie table",)
       movieData = movie_table
     }
     return movieData
