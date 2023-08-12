@@ -41,6 +41,15 @@ If you want to learn more about creating good readme files then refer the follow
 
 ![Alt text](image-5.png)
 
+6.  TODO: The api works with docker-compose
+![Alt text](image-6.png)
+
+![Alt text](image-7.png)
+
+7.  TODO: Swagger works:
+![Alt text](image-8.png)
+
+
 TODO: Tools implemented:
 1. Nest v10
 1.1.    Swagger
